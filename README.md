@@ -1,33 +1,33 @@
-# Wykrywanie klauzul abuzywnych (PL)
+# Detection of Abusive Clauses in Polish Contracts
 
-Klasyfikator binarny wykrywający klauzule abuzywne w języku polskim na podstawie publicznego zbioru danych.
+A binary text classification model for detecting abusive clauses in consumer contracts written in Polish, based on a publicly available dataset.
 
 ## Problem
-W umowach konsumenckich występują zapisy naruszające prawa konsumenta (tzw. klauzule abuzywne). Celem projektu jest zbudowanie modelu, który odróżnia klauzule abuzywne od nieabuzywnych.
+Consumer contracts sometimes contain terms that violate consumer rights (abusive clauses). The goal of this project is to build an NLP model that automatically detects whether a given clause is abusive.
 
-## Dane
-- Źródło: Hugging Face – `laugustyniak/abusive-clauses-pl`
-- Rozmiar: ok. 9,3k rekordów; gotowe podziały train/val/test
-- Język: polski
-- Licencja: **CC BY-NC-SA 4.0** (wyłącznie do celów niekomercyjnych)
-> Uwaga: ten projekt ma charakter edukacyjny/demowy.
+## Dataset
+- Source: Hugging Face – `laugustyniak/abusive-clauses-pl`
+- Size: ~9.3k clauses; predefined train/validation/test splits
+- Language: Polish
+- License: **CC BY-NC-SA 4.0** (non-commercial use only)
+> Disclaimer: This project is for educational/demo purposes only.
 
-## Modele
-1. **Baseline**: TF‑IDF + Logistic Regression  
-2. **Lepszy klasyczny**: TF‑IDF + Linear SVM  
-3. (Opcjonalnie) **Transformer (PL)**: np. HerBERT – fine‑tuning
+## Models
+1. **Baseline**: TF-IDF + Logistic Regression  
+2. **Improved classic**: TF-IDF + Linear SVM  
+3. *(Optional)* **Transformer (PL)**: fine-tuning `HerBERT`
 
-## Jak uruchomić
+## How to Run
 ```bash
-# 1) środowisko
+# 1) Create virtual environment
 python -m venv .venv && source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 
-# 2) trening (wybór modelu: lr | svm)
+# 2) Train (choose model: lr | svm)
 python src/train.py --model svm --seed 42
 
-# 3) ewaluacja
+# 3) Evaluate
 python src/eval.py --checkpoint artifacts/model.joblib
 
-# 4) demo (opcjonalnie)
-python app.py  # uruchamia Streamlit/Gradio
+# 4) Demo (optional)
+python app.py  # Streamlit/Gradio UI
